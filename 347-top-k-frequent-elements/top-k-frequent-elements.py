@@ -1,5 +1,15 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = Counter(nums)
-        # Sort by frequency and get the top k elements
-        return [item for item, freq in count.most_common(k)]
+        maps1={}
+        res=[]
+        for num in nums:
+            if num in maps1:
+                maps1[num]+=1
+            else:
+                maps1[num]=1
+        sorted_items = sorted(maps1.items(), key=lambda item: item[1], reverse=True)
+        
+        for i in range(k):
+            res.append(sorted_items[i][0])
+        
+        return res
